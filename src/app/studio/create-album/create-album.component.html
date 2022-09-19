@@ -1,0 +1,69 @@
+<div class="container-h">
+        <div class="row cent">
+            <h3 class="head">New Album</h3>
+        </div>
+        <div class="form-container mt-3" [formGroup]="albumForm">
+
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Event Name</mat-label>
+                        <input formControlName="eventName" matInput placeholder="username">
+                        <mat-icon matSuffix>celebration</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Customer Name</mat-label>
+                        <input  formControlName="eventName" matInput placeholder="username">
+                        <mat-icon matSuffix>person</mat-icon>
+
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Date</mat-label>
+                        <input type="date" formControlName="eventName" matInput placeholder="username">
+                        <mat-icon matSuffix>calendar_month</mat-icon>
+
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Place</mat-label>
+                        <input  matInput placeholder="username">
+                        <mat-icon matSuffix>pin_drop</mat-icon>
+                    </mat-form-field>
+                </div>
+           
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input  matInput placeholder="username">
+                        <mat-icon matSuffix>mail</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Mobile</mat-label>
+                        <input  matInput placeholder="username">
+                        <mat-icon matSuffix>call</mat-icon>
+                    </mat-form-field>
+                </div>
+           
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <button mat-raised-button>CREATE</button>
+                </div>
+            </div>
+        </div>
+
+</div>

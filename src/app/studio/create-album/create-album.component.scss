@@ -1,0 +1,40 @@
+.container {
+    width: 90vw;
+    height: 90vh;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.form-container {
+    padding: 20px;
+}
+
+.side-image {
+    height: 100%;
+    width: 100%;
+}
+
+.head {
+    font-size: 20px;
+    font-family: cursive;
+    color: #F50057;
+}
+
+button {
+    background-color: #F50057;
+    color: white;
+    width: 100%;
+
+
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}

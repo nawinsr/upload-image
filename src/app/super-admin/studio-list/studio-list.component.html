@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="head-container">
+        <span class="heading">Studio List </span>
+        <div class="head-container-second">
+            <button (click)="inviteStudio()" mat-mini-fab class="primary-btn" aria-label="Example icon button with a delete icon">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="body-container">
+        <ng2-smart-table [settings]="settings" [source]="data" (custom)="onCustomAction($event)">
+        </ng2-smart-table>
+    </div>
+
+</div>

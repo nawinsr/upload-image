@@ -1,0 +1,44 @@
+<div class="row mt-3">
+
+    <div class="col-4">
+        <mat-form-field appearance="outline">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="search">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="col-4">
+
+    </div>
+
+    <div style="text-align: right;" class="col-4">
+        <button (click)="addAlbum()" mat-mini-fab class="primary-btn" aria-label="Example icon button with a delete icon">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+
+
+</div>
+<div class="row ">
+    <div routerLink="/studio/view-album/1" class="col-lg-3 col-md-6 col-sm-12 list-grid" *ngFor="let item of albumList">
+        <div class="list" >
+            <div class="row" >
+                <img class="gal-img" src="../../../assets/images/galery.svg" alt="">
+
+            </div>
+            <div class="row">
+                <span class="al-title">
+                    Krishna Weds Radha
+                </span>
+            </div>
+            <div class="row">
+                <span class="al-date">
+                    20-June-2021
+                </span>
+            </div>
+         
+        </div>
+
+    </div>
+
+</div>

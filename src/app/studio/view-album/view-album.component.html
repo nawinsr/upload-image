@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row tc">
+        <div class="col-4">
+            <p class="heading">Serverless !</p>
+        </div>
+      
+      <div class="col-4">
+        <p class="heading">Light Weight !</p>
+      </div>
+      <div class="col-4">
+        <p class="heading">Quick Sharing !</p>
+      </div>
+    </div>
+
+    <div class="body-containers" *ngIf="!fileUploaded">
+        <div class="col ">
+            <div class="cent">
+                <p class="ins">Its Just a Prototype !</p>
+
+               <p class="ins">You should choose only two images of same size.</p>
+            </div>
+            <div class="col" style="height:50px ;"></div>
+            <div class="cent">
+                <input multiple (change)="uplaodImages($event)" type="file" accept="image/png, image/jpg, image/jpeg" hidden id="fileId">
+                <button (click)="fileClick()" class="primary-btn " mat-raised-button>Create Your Own</button><br>
+            </div>
+
+
+            
+
+        </div>
+        <div>
+            <div>
+                <iframe src="https://nawinsr.github.io/turnjs?test=W3siaW1nIjoiaHR0cHM6Ly9pLmliYi5jby93NktDcXQ1Lzc1YTU2NzVlZGM0Mzk1YmZkMzcxMWZiNTg3ZDk0MGE3LmpwZyJ9LHsiaW1nIjoiaHR0cHM6Ly9pLmliYi5jby94c0tiS21wL25yLTAwMzItNjJ4NDktNTAweDUwMC5qcGcifV0=&name=here !"  width="700px" height="500px"></iframe>
+            
+            </div>
+        </div>
+    </div>
+    <div>
+        
+    </div>
+    <div *ngIf="fileUploaded" style="padding: 30px;">
+        <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        
+            <div class="example-box" *ngFor="let file of preview;let i=index" cdkDrag>
+                <div>
+                    {{i+1}}
+                </div>
+                <div style="margin-left: 10px;">
+                    <img style="width: 100px;height: auto;" [src]="file.img" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row kela">
+            <div class="col-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Your name</mat-label>
+                    <input [(ngModel)]="name" matInput placeholder="Your Name">
+                    <mat-icon matSuffix>person</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-3 mt-2">
+                <button class="primary-btn " (click)="convertToBase64()" mat-raised-button>CREATE</button>
+
+            </div>
+       
+        </div>
+    </div>
+   
+   
+</div>
+<div *ngIf="loader" class="spid" >
+    <mat-spinner color="#F50057" class="spinner"></mat-spinner>
+</div>

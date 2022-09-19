@@ -1,0 +1,30 @@
+.container {
+    width: 70vw;
+    height: 70vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.side-image {
+    height: 100%;
+    width: 100%;
+}
+
+.head {
+    font-size: 20px;
+    font-family: cursive;
+    color: #F50057;
+}
+
+button {
+    background-color: #F50057;
+    color: white;
+    width: 50%;
+
+
+}

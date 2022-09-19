@@ -1,0 +1,95 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: mer;
+}
+
+
+/* Border */
+// .mat-form-field-appearance-outline .mat-form-field-outline {
+//     color: #F50057;
+//   }
+.container {
+  margin-top: 10px;
+  padding-top: 10px;
+  border: 1px solid #efefef;
+  background-color: #fdfdfd;
+  border-radius: 1px;
+  cursor: pointer;
+  height: calc(100vh - 80px);
+
+}
+.container-h {
+  margin-top: 10px;
+  padding-top: 10px;
+  border: 1px solid #efefef;
+  background-color: #fdfdfd;
+  border-radius: 1px;
+  cursor: pointer;
+
+}
+
+.head-container {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+}
+
+.body-container {
+  padding-top: 20px;
+}
+
+.heading {
+  color: #F50057;
+  font-size: 22px;
+  line-height: 40px;
+  font-weight: bold;
+  font-family: cursive;
+}
+
+.head-container-second {
+  margin-right: 20px;
+  text-align: right;
+}
+
+table {
+  border: solid #efefef 1px;
+}
+
+th {
+  border-bottom: solid 1px #efefef;
+}
+
+tr:nth-child(even) {
+  background-color: white;
+}
+
+tr .selected {
+  background-color: red !important;
+}
+
+tbody tr.ng2-smart-row.selected {
+  background: white !important;
+}
+
+.primary-btn {
+  background-color: #F50057;
+  color: white;
+}
+
+.cent{
+  text-align: center!important;
+}
+.lt{
+  text-align: left!important;
+
+}
+.rt{
+  text-align: right!important;
+
+}
