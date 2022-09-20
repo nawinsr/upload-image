@@ -175,41 +175,36 @@ export class ViewAlbumComponent implements OnInit {
     });
   }
   async upload(file: any, i: any) {
-    var myHeaders = new Headers();
-    myHeaders.append("key", "6d207e02198a847aa98d0a2a901485a5");
-    myHeaders.append("source", "https://drive.google.com/uc?id=1zDEupwO75x3KegIlMQLC4FonK_VHSkTx");
-    myHeaders.append("format", "json");
-    myHeaders.append("Cookie", "PHPSESSID=42fj9eo825ssnhsqna6ifjg4h9");
+
 
     var formdata = new FormData();
-    formdata.append("source", file, file.name);
-    formdata.append("type", "file");
-    formdata.append("action", "upload");
-    formdata.append("timestamp", "1663591231363");
-    formdata.append("auth_token", "31b647f2ef0e505c6327c251cfb0553a");
+    formdata.append("image", file, file.name);
+    // formdata.append("type", "file");
+    // formdata.append("action", "upload");
+    // formdata.append("timestamp", "1663591231363");
+    // formdata.append("auth_token", "31b647f2ef0e505c6327c251cfb0553a");
 
     var requestOptions: any = {
       method: 'POST',
-      headers: myHeaders,
       body: formdata,
       redirect: 'follow'
     };
     console.log(requestOptions);
 
-    fetch("https://imgbb.com/json", requestOptions)
+    fetch("https://api.imgbb.com/1/upload?key=31b647f2ef0e505c6327c251cfb0553a", requestOptions)
       .then(response => response.json())
       .then(result => {
         if (result) {
           console.log(result);
-          console.log('result.image.display_url', result.image.display_url);
-          console.log(result.image.display_width, result.image.display_height);
+          console.log('result.image.display_url', result.data.display_url);
+          console.log(result.data.width, result.data.height);
 
 
           // localStorage.setItem(i, result)
-          this.ar = parseInt(result.image.display_width) / parseInt(result.image.display_height)
-          this.urlArray.push({ img: result.image.display_url })
+          this.ar = parseInt(result.data.width) / parseInt(result.data.height)
+          this.urlArray.push({ img: result.data.display_url })
           console.log('urlArray', this.urlArray);
-          if (i == 1 && result.status_code == 200) {
+          if (i == 1 && result.status == 200) {
             setTimeout(() => {
               this.success = true
 
@@ -225,6 +220,10 @@ export class ViewAlbumComponent implements OnInit {
           }
         } else {
           this._snackBar.open('file upload error !')
+          this.fileUploaded=false
+          this.files=[]
+          this.preview=[]
+          this.urlArray=[]
           setTimeout(() => {
             this.loader = false
           })
@@ -233,6 +232,10 @@ export class ViewAlbumComponent implements OnInit {
       })
       .catch(error => {
         this._snackBar.open('file upload error !')
+        this.fileUploaded=false
+        this.files=[]
+        this.preview=[]
+        this.urlArray=[]
         setTimeout(() => {
           this.loader = false
         })
@@ -243,73 +246,34 @@ export class ViewAlbumComponent implements OnInit {
 
 }
 // {
-//   "status_code": 200,
-//   "success": {
-//       "message": "image uploaded",
-//       "code": 200
-//   },
-//   "image": {
-//       "name": "logo-01",
-//       "extension": "png",
-//       "width": "4961",
-//       "height": "3508",
-//       "size": 69414,
-//       "time": "1663592977",
+//   "data": {
+//       "id": "nC3XSX2",
+//       "title": "bus",
+//       "url_viewer": "https://ibb.co/nC3XSX2",
+//       "url": "https://i.ibb.co/8czyVy3/bus.jpg",
+//       "display_url": "https://i.ibb.co/8czyVy3/bus.jpg",
+//       "width": "612",
+//       "height": "408",
+//       "size": 33845,
+//       "time": "1663653726",
 //       "expiration": "0",
-//       "likes": "0",
-//       "description": null,
-//       "original_filename": "logo-01.png",
-//       "is_animated": 0,
-//       "is_360": 0,
-//       "nsfw": 0,
-//       "id_encoded": "6s7rP8k",
-//       "size_formatted": "69.4 KB",
-//       "filename": "logo-01.png",
-//       "url": "https://i.ibb.co/5cgG8kP/logo-01.png",
-//       "url_viewer": "https://ibb.co/6s7rP8k",
-//       "url_viewer_preview": "https://ibb.co/6s7rP8k",
-//       "url_viewer_thumb": "https://ibb.co/6s7rP8k",
 //       "image": {
-//           "filename": "logo-01.png",
-//           "name": "logo-01",
-//           "mime": "image/png",
-//           "extension": "png",
-//           "url": "https://i.ibb.co/5cgG8kP/logo-01.png",
-//           "size": 69414
+//           "filename": "bus.jpg",
+//           "name": "bus",
+//           "mime": "image/jpeg",
+//           "extension": "jpg",
+//           "url": "https://i.ibb.co/8czyVy3/bus.jpg"
 //       },
 //       "thumb": {
-//           "filename": "logo-01.png",
-//           "name": "logo-01",
-//           "mime": "image/png",
-//           "extension": "png",
-//           "url": "https://i.ibb.co/6s7rP8k/logo-01.png"
+//           "filename": "bus.jpg",
+//           "name": "bus",
+//           "mime": "image/jpeg",
+//           "extension": "jpg",
+//           "url": "https://i.ibb.co/nC3XSX2/bus.jpg"
 //       },
-//       "medium": {
-//           "filename": "logo-01.png",
-//           "name": "logo-01",
-//           "mime": "image/png",
-//           "extension": "png",
-//           "url": "https://i.ibb.co/LpXYtr3/logo-01.png"
-//       },
-//       "display_url": "https://i.ibb.co/LpXYtr3/logo-01.png",
-//       "display_width": "4961",
-//       "display_height": "3508",
-//       "delete_url": "https://ibb.co/6s7rP8k/41381f0386e7b865d167eb523c2acb30",
-//       "views_label": "views",
-//       "likes_label": "likes",
-//       "how_long_ago": "1 second ago",
-//       "date_fixed_peer": "2022-09-19 13:09:37",
-//       "title": "logo-01",
-//       "title_truncated": "logo-01",
-//       "title_truncated_html": "logo-01",
-//       "is_use_loader": false
+//       "delete_url": "https://ibb.co/nC3XSX2/61f4d52a05878e0fd7ff256edaa027bc"
 //   },
-//   "request": {
-//       "type": "file",
-//       "action": "upload",
-//       "timestamp": "1663591231363",
-//       "auth_token": "e1033fd70f33a674c494c1b742bf209680730b9c"
-//   },
-//   "status_txt": "OK"
+//   "success": true,
+//   "status": 200
 // }
 
