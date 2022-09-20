@@ -186,7 +186,7 @@ export class ViewAlbumComponent implements OnInit {
     formdata.append("type", "file");
     formdata.append("action", "upload");
     formdata.append("timestamp", "1663591231363");
-    formdata.append("auth_token", "e1033fd70f33a674c494c1b742bf209680730b9c");
+    formdata.append("auth_token", "31b647f2ef0e505c6327c251cfb0553a");
 
     var requestOptions: any = {
       method: 'POST',
