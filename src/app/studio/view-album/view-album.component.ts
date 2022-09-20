@@ -9,14 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./view-album.component.scss']
 })
 export class ViewAlbumComponent implements OnInit {
-  loader=false
+  loader = false
   urlArray: any = []
   fileUploaded = false
   files: any = []
   preview: any = []
   ar: any
-  success=false
-  name=''
+  success = false
+  name = ''
 
   delete(index: any) {
     this.files.splice(index, 1);
@@ -28,7 +28,7 @@ export class ViewAlbumComponent implements OnInit {
     moveItemInArray(this.preview, event.previousIndex, event.currentIndex);
 
   }
-  constructor(private router:Router,private _snackBar: MatSnackBar) { }
+  constructor(private router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -125,20 +125,20 @@ export class ViewAlbumComponent implements OnInit {
     console.log(event.target.files);
     let s = event.target.files
     console.log(s.length);
-    if(s.length>2){
-       this._snackBar.open('uploaded files more than two !',)
-       setTimeout(() => {
+    if (s.length > 2) {
+      this._snackBar.open('uploaded files more than two !',)
+      setTimeout(() => {
         this._snackBar.dismiss()
-       }, 2000);
-       return
+      }, 2000);
+      return
     }
-    if(s.length<2){
+    if (s.length < 2) {
       this._snackBar.open('uploaded files less than two !')
       setTimeout(() => {
         this._snackBar.dismiss()
-       }, 2000);
+      }, 2000);
       return
-   }
+    }
     for (let i = 0; i < s.length; i++) {
       const element = s[i];
       this.files.push(element)
@@ -155,23 +155,23 @@ export class ViewAlbumComponent implements OnInit {
 
   }
   async convertToBase64() {
-    if(this.name=='') {
-       this._snackBar.open('Enter Your name !')
-       setTimeout(() => {
+    if (this.name == '') {
+      this._snackBar.open('Enter Your name !')
+      setTimeout(() => {
         this._snackBar.dismiss()
-       }, 2000);
-       return
+      }, 2000);
+      return
     }
-    this.loader=true
+    this.loader = true
     console.log(this.files);
 
     this.files.forEach(async (element: any, index: any) => {
       await this.upload(element, index).then(url => {
-        console.log(url,index);
+        console.log(url, index);
 
-      
+
       })
-      
+
     });
   }
   async upload(file: any, i: any) {
@@ -201,32 +201,43 @@ export class ViewAlbumComponent implements OnInit {
       .then(result => {
         if (result) {
           console.log(result);
-          console.log('result.image.display_url',result.image.display_url);
-          console.log(result.image.display_width,result.image.display_height);
-          
-          
+          console.log('result.image.display_url', result.image.display_url);
+          console.log(result.image.display_width, result.image.display_height);
+
+
           // localStorage.setItem(i, result)
           this.ar = parseInt(result.image.display_width) / parseInt(result.image.display_height)
           this.urlArray.push({ img: result.image.display_url })
-          console.log('urlArray',this.urlArray);
-          
-        }
-        if(i==1&&result.status_code==200) {
-          setTimeout(() => {
-            this.success=true
+          console.log('urlArray', this.urlArray);
+          if (i == 1 && result.status_code == 200) {
+            setTimeout(() => {
+              this.success = true
 
-            console.log(this.urlArray,this.ar);
-            const sa=JSON.stringify([...this.urlArray])
-            localStorage.setItem('b',this.base64encode(sa))
-            localStorage.setItem('ar',this.ar)
-            localStorage.setItem('name',this.name )
-            this.loader=false
-            this.router.navigateByUrl('/share')
-          }, 2000);
-   
+              console.log(this.urlArray, this.ar);
+              const sa = JSON.stringify([...this.urlArray])
+              localStorage.setItem('b', this.base64encode(sa))
+              localStorage.setItem('ar', this.ar)
+              localStorage.setItem('name', this.name)
+              this.loader = false
+              this.router.navigateByUrl('/share')
+            }, 2000);
+
+          }
+        } else {
+          this._snackBar.open('file upload error !')
+          setTimeout(() => {
+            this.loader = false
+          })
         }
+
       })
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        this._snackBar.open('file upload error !')
+        setTimeout(() => {
+          this.loader = false
+        })
+        console.log('error', error)
+      })
   }
 
 
