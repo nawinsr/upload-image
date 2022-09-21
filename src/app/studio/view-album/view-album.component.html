@@ -1,40 +1,46 @@
 <div class="container">
     <div class="row tc">
-        <div class="col-4">
+        <div class="col-lg-4 col-md-12 col-lg-sm-12">
             <p class="heading">Serverless !</p>
         </div>
       
-      <div class="col-4">
+      <div class="col-lg-4 col-md-12 col-lg-sm-12">
         <p class="heading">Light Weight !</p>
       </div>
-      <div class="col-4">
+      <div class="col-lg-4 col-md-12 col-lg-sm-12">
         <p class="heading">Quick Sharing !</p>
       </div>
     </div>
 
-    <div class="body-containers" *ngIf="!fileUploaded">
-        <div class="col ">
-            <div class="cent">
-                <p class="ins">Its Just a Prototype !</p>
-
-               <p class="ins">You should choose only two images of same size.</p>
-            </div>
-            <div class="col" style="height:50px ;"></div>
-            <div class="cent">
-                <input multiple (change)="uplaodImages($event)" type="file" accept="image/png, image/jpg, image/jpeg" hidden id="fileId">
-                <button (click)="fileClick()" class="primary-btn " mat-raised-button>Create Your Own</button><br>
-            </div>
-
-
-            
-
-        </div>
-        <div>
+    <div class=" row" *ngIf="!fileUploaded">
+        <div class="col-lg-8 col-md-12 col-sm-12">
             <div>
-                <iframe src="https://nawinsr.github.io/turnjs/?test=W3siaW1nIjoiaHR0cHM6Ly9pLmliYi5jby9rMEdYcmc5LzAxNWExNzU3ZTY3Zjc2NmExMjYyMWFmNTQzYjNhNWZkLmpwZyJ9LHsiaW1nIjoiaHR0cHM6Ly9pLmliYi5jby81V3A4V0hZLzE4LmpwZyJ9XQ==&name=here !&ar=1.7777777777777777"  width="700px" height="500px"></iframe>
+                <iframe src="https://nawinsr.github.io/turnjs/?test=W3siaW1nIjoiaHR0cHM6Ly9pLmliYi5jby9rMEdYcmc5LzAxNWExNzU3ZTY3Zjc2NmExMjYyMWFmNTQzYjNhNWZkLmpwZyJ9LHsiaW1nIjoiaHR0cHM6Ly9pLmliYi5jby81V3A4V0hZLzE4LmpwZyJ9XQ==&name=! Turn Me &ar=1.2"  [width]="ww" height="500px"></iframe>
             
             </div>
         </div>
+        <div class=" alg col-lg-4 col-md-12 col-sm-12">
+            <div>
+                <div class="cent">
+                    <input multiple (change)="uplaodImages($event)" type="file" accept="image/png, image/jpg, image/jpeg" hidden id="fileId">
+                    <button (click)="fileClick()" class="primary-btn " mat-raised-button>Create Your Own</button><br>
+                </div>
+    
+                <div class="cent mt-3">
+                    <p class="ins">Its Just a Prototype !</p>
+    
+                   <p class="ins">You should choose only two images of same size.</p>
+                </div>
+
+            </div>
+        
+         
+
+
+            
+
+        </div>
+
     </div>
     <div>
         

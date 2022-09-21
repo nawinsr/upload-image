@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./view-album.component.scss']
 })
 export class ViewAlbumComponent implements OnInit {
+  ww='700px';
   loader = false
   urlArray: any = []
   fileUploaded = false
@@ -31,6 +32,7 @@ export class ViewAlbumComponent implements OnInit {
   constructor(private router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    if(window.screen.width<700)this.ww=(window.screen.width-50)+'px'
   }
   base64abc = [
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
