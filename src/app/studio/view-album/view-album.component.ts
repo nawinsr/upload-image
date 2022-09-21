@@ -166,73 +166,67 @@ export class ViewAlbumComponent implements OnInit {
     }
     this.loader = true
     console.log(this.files);
+for (let index = 0; index < this.files.length; index++) {
+  const element = this.files[index];
+  await this.upload(element, index).then(url => {
+    console.log(url, index);
 
-    this.files.forEach(async (element: any, index: any) => {
-      await this.upload(element, index).then(url => {
-        console.log(url, index);
 
-
-      })
-
-    });
+  }).catch(err=>{
+    console.log(err);
+    
+  })
+}
+  
   }
   async upload(file: any, i: any) {
+return new Promise((resolve, reject) => {
+  var formdata = new FormData();
+  formdata.append("image", file, file.name);
+  // formdata.append("type", "file");
+  // formdata.append("action", "upload");
+  // formdata.append("timestamp", "1663591231363");
+  // formdata.append("auth_token", "31b647f2ef0e505c6327c251cfb0553a");
+
+  var requestOptions: any = {
+    method: 'POST',
+    body: formdata,
+    redirect: 'follow'
+  };
+  console.log(requestOptions);
+
+  fetch("https://api.imgbb.com/1/upload?key=31b647f2ef0e505c6327c251cfb0553a", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      if (result) {
+        console.log(result);
+        console.log('result.image.display_url', result.data.display_url);
+        console.log(result.data.width, result.data.height);
 
 
-    var formdata = new FormData();
-    formdata.append("image", file, file.name);
-    // formdata.append("type", "file");
-    // formdata.append("action", "upload");
-    // formdata.append("timestamp", "1663591231363");
-    // formdata.append("auth_token", "31b647f2ef0e505c6327c251cfb0553a");
-
-    var requestOptions: any = {
-      method: 'POST',
-      body: formdata,
-      redirect: 'follow'
-    };
-    console.log(requestOptions);
-
-    fetch("https://api.imgbb.com/1/upload?key=31b647f2ef0e505c6327c251cfb0553a", requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        if (result) {
-          console.log(result);
-          console.log('result.image.display_url', result.data.display_url);
-          console.log(result.data.width, result.data.height);
-
-
-          // localStorage.setItem(i, result)
-          this.ar = parseInt(result.data.width) / parseInt(result.data.height)
-          this.urlArray.push({ img: result.data.display_url })
-          console.log('urlArray', this.urlArray);
-          if (i == 1 && result.status == 200) {
-            setTimeout(() => {
-              this.success = true
-
-              console.log(this.urlArray, this.ar);
-              const sa = JSON.stringify([...this.urlArray])
-              localStorage.setItem('b', this.base64encode(sa))
-              localStorage.setItem('ar', this.ar)
-              localStorage.setItem('name', this.name)
-              this.loader = false
-              this.router.navigateByUrl('/share')
-            }, 2000);
-
-          }
-        } else {
-          this._snackBar.open('file upload error !')
-          this.fileUploaded=false
-          this.files=[]
-          this.preview=[]
-          this.urlArray=[]
-          setTimeout(() => {
-            this.loader = false
-          })
+        // localStorage.setItem(i, result)
+        this.ar = parseInt(result.data.width) / parseInt(result.data.height)
+        this.urlArray.push({ img: result.data.display_url })
+        console.log('urlArray', this.urlArray);
+        if (i == 0&& result.status == 200) {
+          resolve(true)
         }
+        if (i == 1 && result.status == 200) {
+          setTimeout(() => {
+            this.success = true
 
-      })
-      .catch(error => {
+            console.log(this.urlArray, this.ar);
+            const sa = JSON.stringify([...this.urlArray])
+            localStorage.setItem('b', this.base64encode(sa))
+            localStorage.setItem('ar', this.ar)
+            localStorage.setItem('name', this.name)
+            this.loader = false
+            resolve(true)
+            this.router.navigateByUrl('/share')
+          }, 2000);
+
+        }
+      } else {
         this._snackBar.open('file upload error !')
         this.fileUploaded=false
         this.files=[]
@@ -240,9 +234,28 @@ export class ViewAlbumComponent implements OnInit {
         this.urlArray=[]
         setTimeout(() => {
           this.loader = false
-        })
-        console.log('error', error)
-      })
+          resolve(true)
+
+        },1000)
+      }
+
+    })
+    .catch(error => {
+      this._snackBar.open('file upload error !')
+      this.fileUploaded=false
+      this.files=[]
+      this.preview=[]
+      this.urlArray=[]
+      setTimeout(() => {
+        this.loader = false
+        resolve(true)
+
+      },1000)
+      console.log('error', error)
+    })
+})
+
+
   }
 
 
